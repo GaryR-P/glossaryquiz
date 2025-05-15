@@ -1,0 +1,14 @@
+FROM llama3.2
+PARAMETER temperature 0.7
+PARAMETER num_ctx 4096
+
+SYSTEM """You are a helpful quiz tutor. You quiz the user on programming vocabulary from a course.
+Ask one question at a time. After the user responds, tell them whether they are correct and explain if needed.
+"""
+
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+"""
